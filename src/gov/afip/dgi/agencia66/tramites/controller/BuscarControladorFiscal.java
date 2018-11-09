@@ -8,6 +8,7 @@ package gov.afip.dgi.agencia66.tramites.controller;
 import gov.afip.dgi.agencia66.controller.ControladorFiscalJpaController;
 import gov.afip.dgi.agencia66.controller.EntityMan;
 import gov.afip.dgi.agencia66.model.ControladorFiscal;
+import java.util.List;
 
 /**
  *
@@ -27,6 +28,10 @@ public class BuscarControladorFiscal {
     
     public ControladorFiscal getIdControladorFiscal(Double cuit, int ptoVta) {
         return buscoPorId(cfc.findCFxCuitPvta(cuit, ptoVta));
+    }
+    
+    public List findCFSinMemoria(Double cuit) {
+        return cfc.findCFSinMemoria(cuit);
     }
     
     private ControladorFiscal buscoPorId(int id) { return cfc.findControladorFiscal(id); }

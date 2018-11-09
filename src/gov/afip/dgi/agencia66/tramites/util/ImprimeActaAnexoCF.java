@@ -25,9 +25,11 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import gov.afip.dgi.agencia66.model.ParfrasesAnio;
 import gov.afip.dgi.agencia66.controller.EntityMan;
 import gov.afip.dgi.agencia66.controller.ParfrasesAnioJpaController;
+import gov.afip.dgi.agencia66.model.RetiroMemoria;
 import gov.afip.dgi.agencia66.util.FormateaSalidasTexto;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -1058,6 +1060,11 @@ public class ImprimeActaAnexoCF {
         return pfa.getFrase();
     }
 
+    /****************************************************************************************
+     * 
+     * 
+     */
+    
     private void imprimeActaTecnico(String copia) throws IOException, DocumentException{
         String leyenda = obtieneLeyenda();
         
@@ -1158,7 +1165,7 @@ public class ImprimeActaAnexoCF {
             for(int i=0; i<5; i++) {
                 psl.add(new Phrase(Chunk.NEWLINE));
                 document.add(psl);
-        }
+            }
        
         PdfPTable tablaFirma = new PdfPTable(3);
         
@@ -1226,6 +1233,14 @@ public class ImprimeActaAnexoCF {
         Desktop.getDesktop().print(file);
 
     }
+    
+    /****************************************************************************************
+     * 
+     * 
+     * /
+     * @throws IOException
+     * @throws DocumentException 
+     */
 
     private void imprimeNotaTecnico() throws IOException, DocumentException{
         String leyenda = obtieneLeyenda();
@@ -1444,6 +1459,11 @@ public class ImprimeActaAnexoCF {
         
         document.add(tablaInicio);
         
+        /** NUEVO -> Para separar la linea de firma del cuerpo de la nota */
+        for(int i = 0; i < 8; i++) {
+            document.add(new Phrase(Chunk.NEWLINE));
+        }
+        
         PdfPTable tablaFirma = new PdfPTable(2);
         Font fontFirma = FontFactory.getFont(FontFactory.COURIER, 8, Font.ITALIC, BaseColor.BLACK);
         
@@ -1494,6 +1514,170 @@ public class ImprimeActaAnexoCF {
         Desktop.getDesktop().print(file);
         Desktop.getDesktop().print(file);
     }
+
+        public void imprimeActaRetornoMemoria(ControladorFiscal cf, RetiroMemoria rm, int anio) throws IOException, DocumentException{
+            for(int i=0; i<3; i++) {
+                        switch (i) {
+                            case 0:
+                                imprimeRM("ORIGINAL", cf, rm, anio);
+
+                                break;
+                            case 1:
+                                imprimeRM("DUPLICADO", cf, rm, anio);
+                                break;
+                            default:
+                                imprimeRM("COPIA SISTEMAS", cf, rm, anio);
+                                break;
+                        }
+            }
+        }
+        
+        private void imprimeRM(String copia, ControladorFiscal cf, RetiroMemoria rm, int _anio) throws FileNotFoundException, DocumentException, IOException {
+        
+            Document document = new Document(PageSize.A4, 35, 30, 50, 50);
+            FileOutputStream fileOutputStream = new FileOutputStream("ActaEntregaMemoria"+copia+".pdf");
+            anio = _anio;
+            String leyenda = obtieneLeyenda();
             
+            PdfWriter writer = PdfWriter.getInstance(document, fileOutputStream);
+            Rectangle rect = new Rectangle(30, 30, 580, 800);
+            writer.setBoxSize("art", rect);
+            EncabezadoYPieActa event = new EncabezadoYPieActa(leyenda, rm.getActa(), copia);
+            writer.setPageEvent(event);
+            document.open();
+
+            Font fontContenido = FontFactory.getFont(FontFactory.TIMES_ROMAN, 13, Font.NORMAL, BaseColor.BLACK);
+            Font fontTitulos = FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 11, Font.UNDERLINE, BaseColor.RED);
+
+            PdfPTable tablaFormulario = new PdfPTable(2);
+
+             Font fontFormulario = FontFactory.getFont(FontFactory.TIMES_ROMAN, 16, Font.BOLD, BaseColor.BLACK);
+             Phrase frase = new Phrase("          F. 8400/L", fontFormulario);
+             PdfPCell cell = new PdfPCell(frase);
+             cell.setRowspan(2);
+             cell.setBorderColor(BaseColor.WHITE);
+             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+             cell.setBorder(0);
+             tablaFormulario.addCell(cell);
+
+             Font fontCopia = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.DARK_GRAY);
+             frase = new Phrase("ORIGINAL: para la Administración Federal", fontCopia);
+             cell = new PdfPCell(frase);
+             cell.setBorder(0);
+             tablaFormulario.addCell(cell);
+
+             frase = new Phrase("DUPLICADO: para el Ciudadano", fontCopia);
+             cell = new PdfPCell(frase);
+             cell.setBorder(0);
+             tablaFormulario.addCell(cell);
+
+             document.add(tablaFormulario);
+
+             Paragraph paragraph = new Paragraph();
+             paragraph.add(new Phrase(Chunk.NEWLINE));
+
+
+             document.add(paragraph);
+
+            PdfPTable tablaSirvase = new PdfPTable(1);
+
+             fontCopia = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.BLACK);
+             frase = new Phrase("Sirvase citar", fontCopia);
+             cell = new PdfPCell(frase);
+             cell.setBorder(0);
+             tablaSirvase.addCell(cell);
+
+             document.add(tablaSirvase);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeZone(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
+            int dia= cal.get(Calendar.DATE);
+            int mes = cal.get(Calendar.MONTH);
+            int mesOk = mes+1;
+            int ann = cal.get(Calendar.YEAR);
+            int hora = cal.get(Calendar.HOUR_OF_DAY);
+            int minutos = cal.get(Calendar.MINUTE); 
+            //FormateaSalidasTexto fst = new FormateaSalidasTexto();
+            String cuitFormateado = (df11.format(cf.getCuit()));
+
+             paragraph
+              .add(new Phrase("En la ciudad de Tigre, pcia de Bs. As. al " +df2.format(dia)+"/"+df2.format(mesOk)+"/"+df2.format(ann)
+                             +" , siendo las "+df2.format(hora)+":"+df2.format(minutos) +" hs. comparece en la agencia 66 "
+                             +" de la Administración Federal de Ingresos Públicos el Sr/a. " +rm.getRetira()
+                             +" , Doc. N° "+rm.getDni() +" que exhibe, domiciliado en "+rm.getDireccion()
+                             +", en su caracter de " +rm.getCaracter() +" de la entidad " +cf.getRazonSocial()
+                             +" , inscripta bajo el N° de CUIT: " +fst.formatoCuit(cuitFormateado)  +", siendo atendido por el funcionario "
+                             //+" , inscripta bajo el N° de CUIT: " +fst.formatoCuit(Double.toString(cf.getCuit()) )  +", siendo atendido por el funcionario "
+                             +"de esta administración " +rm.getAgente() +", Legajo N°: " +rm.getLegajo() +". Conforme quedara "
+                             +"sentado en Acta F.8400 N°: " +cf.getActa()+" del " +cf.getFechaPoceso()
+                             +", habiendose leido la información obrante en la memoria fiscal retirada en misma fecha, " 
+                             +" correspondiente al controlador fiscal marca: " +cf.getMarca() +" modelo: " +cf.getModelo() +" código: " +cf.getCodigo() +" N°: " 
+                             +cf.getNumeroCodigo() +", punto de venta " +cf.getPuestoVenta() +", se han obtenido los reportes de auditoría que arrojan "
+                             +"la siguiente información: N° de Z inicial: " +cf.getZDesde() +"; N° de Z final: " +cf.getZHasta() +" monto total de ventas: $" 
+                             +cf.getVentaingresado() +"; monto total de IVA: $" +dfImp.format(cf.getIvaingresado()) +"; último ticket emitido: " +dfImp.format(cf.getUltimocingresado())
+                             +" con cantidad de bloqueos: " +cf.getBloqueos() +". No siendo para mas , previa lectura a viva voz y ratificación de la presente, se firman de conformidad tres (3) "
+                             +"ejemplares de un mismo tenor y a un solo efecto el acta N°" +rm.getActa()+", recibiendo el/la Sr/a. " +rm.getRetira()
+                             +" duplicado de la misma. Conste.-",fontContenido));
+
+
+                paragraph.setAlignment(Element.ALIGN_JUSTIFIED);
+                // Agregar saltos de linea
+                document.add(paragraph);
+
+                Paragraph psl = new  Paragraph();
+
+                for(int i=0; i<5; i++) {
+                    psl.add(new Phrase(Chunk.NEWLINE));
+                    document.add(psl);
+            }
+
+            PdfPTable tablaFirma = new PdfPTable(2);
+
+            Font fontFirma = FontFactory.getFont(FontFactory.COURIER, 8, Font.ITALIC, BaseColor.BLACK);
+            frase =  new Phrase(rm.getRetira(), fontFirma);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            tablaFirma.addCell(cell);
+
+            frase =  new Phrase(rm.getAgente(), fontFirma);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            tablaFirma.addCell(cell);
+
+            frase =  new Phrase(rm.getDireccion(), fontFirma);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            tablaFirma.addCell(cell);
+
+            frase =  new Phrase("Legajo N°" +rm.getLegajo(), fontFirma);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            tablaFirma.addCell(cell);
+
+            frase =  new Phrase("Doc N°: " +rm.getDni() + " - " +rm.getCaracter(), fontFirma);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            tablaFirma.addCell(cell);
+
+            frase =  new Phrase(Chunk.NEWLINE);
+            cell =  new PdfPCell(frase);
+            cell.setBorderColor(BaseColor.WHITE);
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            tablaFirma.addCell(cell);
+
+            document.add(tablaFirma);
+
+            document.close();
+
+            // Abrir el archivo
+            File file = new File("ActaEntregaMemoria" +copia+".pdf");
+            Desktop.getDesktop().print(file);
+    }
+
     
 }

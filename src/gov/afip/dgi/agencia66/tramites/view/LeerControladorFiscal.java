@@ -53,7 +53,7 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
     
     FormateaSalidasTexto fst = new FormateaSalidasTexto();
     
-    public LeerControladorFiscal() {
+    public LeerControladorFiscal() throws javax.persistence.PersistenceException {
         LOGGER.log(Level.INFO, "Leer ControladorFiscal");
         initComponents();
         URL url = getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/icono.png");
@@ -235,6 +235,12 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
         });
 
         jLabel2.setText("N° Solicitud: ");
+
+        txtSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSolicitudActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("N° Acta:");
 
@@ -1053,10 +1059,14 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void txtSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSolicitudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSolicitudActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws javax.persistence.PersistenceException{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1276,9 +1286,9 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
     private void grabarTramite(ControladorFiscal controlador) {
         LOGGER.log(Level.INFO, "Grabar Tramite");
         Logger.getLogger(LeerControladorFiscal.class.getName()).log(Level.INFO, "Por Grabar","PEPEPE");
-        
+        int opcion;
             try {
-                int opcion = JOptionPane.showConfirmDialog(null, "¿Realmente deseas Grabar el caso?", "PersisteCF?", JOptionPane.YES_NO_OPTION);
+                opcion = JOptionPane.showConfirmDialog(null, "¿Realmente deseas Grabar el caso?", "PersisteCF?", JOptionPane.YES_NO_OPTION);
 
                 if (opcion == 0) { 
                   ControladorFiscalJpaController cfc = new ControladorFiscalJpaController(EntityMan.getInstance());
@@ -1290,8 +1300,43 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
 
 
             } catch (Exception ex) {
+                System.out.println("Es:" +controlador.getActa() +" - "  +
+                                    controlador.getAgente() +" - "  +
+                                    controlador.getCaracter()  +" - "  +
+                                    controlador.getCodigo() +" - "  +
+                                    controlador.getCredencial() +" - "  +
+                                    controlador.getDireccion() +" - "  +
+                                    controlador.getDocumento() +" - "  +
+                                    controlador.getEstado() +" - "  +
+                                    controlador.getFechaFinal()+" - "  +
+                                    controlador.getFechaInicial() +" - "  +
+                                    controlador.getFechaPoceso() +" - "  +
+                                    controlador.getFecha() +" - "  +
+                                    controlador.getLegajo()+" - "  +
+                                    controlador.getMarca()+" - "  +
+                                    controlador.getModelo()+" - "  +
+                                    controlador.getNombre()+" - "  +
+                                    controlador.getNumeroCodigo()+" - "  +
+                                    controlador.getPaginaAfip()+" - "  +
+                                    controlador.getPaginaTecnico()+" - "  +
+                                    controlador.getPrecinto()+" - "  +
+                                    controlador.getPrecinto445()+" - "  +
+                                    controlador.getPrecintolur()+" - "  +
+                                    controlador.getRazonSocial()+" - "  +
+                                    controlador.getTramite()+" - "  +
+                                    controlador.getBloqueo()+" - "  +
+                                    controlador.getBloqueo()+" - "  +
+                                    controlador.getBloqueos());
+                
+                
+                
+                
+                
+                
+                
                 LOGGER.log(Level.INFO, "No pudo grabar la Sol: " +controlador.getSolicitud() +"de: " +controlador.getRazonSocial());
                 Logger.getLogger(LeerControladorFiscal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "No pudo grabar la Sol: " +controlador.getSolicitud() +"de: " +controlador.getRazonSocial() +ex.getMessage());
             }
     }
 
@@ -1310,6 +1355,14 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
             if(valido()) {
                 System.out.println("ES VALIDO!!!");
                 LOGGER.log(Level.INFO, "Es Válido");
+                
+                Calendar cal = Calendar.getInstance();
+                int fp_anio= cal.get(Calendar.YEAR);
+                int fp_mes= cal.get(Calendar.MONTH);
+                int fp_dia= cal.get(Calendar.DATE);
+                
+                String fp = String.valueOf(fp_anio)+String.format("%02d", fp_mes)+String.format("%02d", fp_dia);
+                
                 controlador.setTramite((String)cmbTramite.getSelectedItem());
                 controlador.setSolicitud(Double.parseDouble(txtSolicitud.getText()));
                 controlador.setAgente((String)cmbOperador.getSelectedItem());
@@ -1391,6 +1444,7 @@ public class LeerControladorFiscal extends javax.swing.JFrame {
                     controlador.setCredencial(txtCredencial.getText());
                     controlador.setObservaciones2(txtObservaciones2.getText());
                     controlador.setCuit(Double.parseDouble(txtCuit.getText()));
+                    controlador.setFechaPoceso(fst.fecha2SqliteFecha(fp));
                 }
                 //controlador.setCuit(Double.parseDouble(leyendo.getCuit()));
                 //System.out.println("Seteando: " +leyendo.getCuit());

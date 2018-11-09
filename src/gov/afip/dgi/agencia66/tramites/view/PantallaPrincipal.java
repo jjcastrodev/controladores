@@ -6,7 +6,11 @@
 package gov.afip.dgi.agencia66.tramites.view;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +42,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menuCF = new javax.swing.JMenu();
         opcLeerCF = new javax.swing.JMenuItem();
         opcBuscarCF = new javax.swing.JMenuItem();
+        opcEntregarMemoria = new javax.swing.JMenuItem();
         opcAltaTarea = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         opcGenerarEstadistica = new javax.swing.JMenuItem();
@@ -53,6 +58,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         menuCF.setText("Controladores Fiscales");
 
+        opcLeerCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, 0));
         opcLeerCF.setText("Leer CF");
         opcLeerCF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +67,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         menuCF.add(opcLeerCF);
 
+        opcBuscarCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
         opcBuscarCF.setText("Buscar CF");
         opcBuscarCF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +75,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCF.add(opcBuscarCF);
+
+        opcEntregarMemoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, 0));
+        opcEntregarMemoria.setText("Entregar Memoria");
+        opcEntregarMemoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcEntregarMemoriaActionPerformed(evt);
+            }
+        });
+        menuCF.add(opcEntregarMemoria);
 
         jMenuBar1.add(menuCF);
 
@@ -120,8 +136,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void opcLeerCFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcLeerCFActionPerformed
-        //new AltaCF().setVisible(true);
-        new LeerControladorFiscal().setVisible(true);
+        try {
+            //new AltaCF().setVisible(true);
+            new LeerControladorFiscal().setVisible(true);
+        } catch (javax.persistence.PersistenceException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al conectar a la base de datos -> " +ex.getMessage() 
+                                                + " Posible causa: Cambio contraseña de usuario de acceso? ", 
+                                                "Error de Acceso a base de datos...", JOptionPane.ERROR_MESSAGE );
+        }
         
     }//GEN-LAST:event_opcLeerCFActionPerformed
 
@@ -132,6 +155,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void opcBuscarCFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcBuscarCFActionPerformed
         new BuscarTramiteCFP().setVisible(true);
     }//GEN-LAST:event_opcBuscarCFActionPerformed
+
+    private void opcEntregarMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcEntregarMemoriaActionPerformed
+        new EntregarMemoria().setVisible(true);
+    }//GEN-LAST:event_opcEntregarMemoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +199,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCF;
     private javax.swing.JMenu opcAltaTarea;
     private javax.swing.JMenuItem opcBuscarCF;
+    private javax.swing.JMenuItem opcEntregarMemoria;
     private javax.swing.JMenuItem opcGenerarEstadistica;
     private javax.swing.JMenuItem opcLeerCF;
     private javax.swing.JMenuItem opcSalir;
