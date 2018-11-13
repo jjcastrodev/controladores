@@ -1,0 +1,49 @@
+
+
+Version:	3.10
+CmdLine:	D:\desarrollo\ejecutables\contFiscal.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\desarrollo\ejecutables\.
+Java min ver:	1.0.0
+Java max ver:	
+32-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Check launcher:	C:\Program Files\Java\jdk1.8.0_77\jre\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_77
+Check launcher:	C:\Program Files\Java\jdk1.8.0_77\jre\bin\javaw.exe (OK)
+Match:		1.8.0_077
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_144
+Check launcher:	C:\Program Files (x86)\Java\jre1.8.0_144\bin\javaw.exe (OK)
+Match:		1.8.0_144
+32-bit search:	SOFTWARE\JavaSoft\JDK...
+32-bit search:	SOFTWARE\JavaSoft\JRE...
+Runtime used:	1.8.0_144 (32-bit)
+Main class:	gov.afip.dgi.agencia66.tramites.view.Inicio
+Add classpath:	lib\eclipselink.jar
+Add classpath:	lib\javax.persistence_2.1.0.v201304241213.jar
+Add classpath:	lib\org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar
+Add classpath:	lib\beansbinding-1.2.1.jar
+Add classpath:	lib\org.eclipse.persistence.antlr.jar
+Add classpath:	lib\org.eclipse.persistence.asm.jar
+Add classpath:	lib\org.eclipse.persistence.core.jar
+Add classpath:	lib\org.eclipse.persistence.dbws.jar
+Add classpath:	lib\org.eclipse.persistence.jpa.jar
+Add classpath:	lib\org.eclipse.persistence.jpa.jpql.jar
+Add classpath:	lib\org.eclipse.persistence.jpa.modelgen.processor.jar
+Add classpath:	lib\org.eclipse.persistence.moxy.jar
+Add classpath:	lib\org.eclipse.persistence.oracle.jar
+Add classpath:	lib\javax.persistence.jar
+Add classpath:	lib\sqlite-jdbc-3.15.1.jar
+Add classpath:	lib\sqlite-jdbc-3.7.2.jar
+Add classpath:	lib\Util.jar
+Add classpath:	lib\itext5-itextpdf-5.5.11.jar
+Add classpath:	lib\ModelosAG66.jar
+Launcher:	C:\Program Files (x86)\Java\jre1.8.0_144\bin\javaw.exe
+Launcher args:	-classpath "D:\desarrollo\ejecutables\contFiscal.exe;lib\eclipselink.jar;lib\javax.persistence_2.1.0.v201304241213.jar;lib\org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar;lib\beansbinding-1.2.1.jar;lib\org.eclipse.persistence.antlr.jar;lib\org.eclipse.persistence.asm.jar;lib\org.eclipse.persistence.core.jar;lib\org.eclipse.persistence.dbws.jar;lib\org.eclipse.persistence.jpa.jar;lib\org.eclipse.persistence.jpa.jpql.jar;lib\org.eclipse.persistence.jpa.modelgen.processor.jar;lib\org.eclipse.persistence.moxy.jar;lib\org.eclipse.persistence.oracle.jar;lib\javax.persistence.jar;lib\sqlite-jdbc-3.15.1.jar;lib\sqlite-jdbc-3.7.2.jar;lib\Util.jar;lib\itext5-itextpdf-5.5.11.jar;lib\ModelosAG66.jar" gov.afip.dgi.agencia66.tramites.view.Inicio
+Args length:	754/32768 chars
+Exit code:	0
