@@ -43,6 +43,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         opcLeerCF = new javax.swing.JMenuItem();
         opcBuscarCF = new javax.swing.JMenuItem();
         opcEntregarMemoria = new javax.swing.JMenuItem();
+        opcListMemorias = new javax.swing.JMenuItem();
         opcAltaTarea = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         opcGenerarEstadistica = new javax.swing.JMenuItem();
@@ -58,7 +59,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         menuCF.setText("Controladores Fiscales");
 
-        opcLeerCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, 0));
+        opcLeerCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        opcLeerCF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/leer.png"))); // NOI18N
         opcLeerCF.setText("Leer CF");
         opcLeerCF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +69,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         menuCF.add(opcLeerCF);
 
-        opcBuscarCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+        opcBuscarCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        opcBuscarCF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/buscar.png"))); // NOI18N
         opcBuscarCF.setText("Buscar CF");
         opcBuscarCF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +79,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         menuCF.add(opcBuscarCF);
 
-        opcEntregarMemoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, 0));
+        opcEntregarMemoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        opcEntregarMemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/Entregar.jpg"))); // NOI18N
         opcEntregarMemoria.setText("Entregar Memoria");
         opcEntregarMemoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +88,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCF.add(opcEntregarMemoria);
+
+        opcListMemorias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        opcListMemorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/Listado.png"))); // NOI18N
+        opcListMemorias.setText("Listado de Memorias extraídas");
+        opcListMemorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcListMemoriasActionPerformed(evt);
+            }
+        });
+        menuCF.add(opcListMemorias);
 
         jMenuBar1.add(menuCF);
 
@@ -160,6 +174,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         new EntregarMemoria().setVisible(true);
     }//GEN-LAST:event_opcEntregarMemoriaActionPerformed
 
+    private void opcListMemoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcListMemoriasActionPerformed
+        new ListadoMemorias().setVisible(true);
+    }//GEN-LAST:event_opcListMemoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +220,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem opcEntregarMemoria;
     private javax.swing.JMenuItem opcGenerarEstadistica;
     private javax.swing.JMenuItem opcLeerCF;
+    private javax.swing.JMenuItem opcListMemorias;
     private javax.swing.JMenuItem opcSalir;
     private javax.swing.JMenuItem opcVerEstadisticas;
     // End of variables declaration//GEN-END:variables

@@ -34,6 +34,10 @@ public class BuscarControladorFiscal {
         return cfc.findCFSinMemoria(cuit);
     }
     
+     public List findCFSinMemoria() {
+        return cfc.findCFSinMemoria();
+    }
+    
     private ControladorFiscal buscoPorId(int id) { return cfc.findControladorFiscal(id); }
     
 }
