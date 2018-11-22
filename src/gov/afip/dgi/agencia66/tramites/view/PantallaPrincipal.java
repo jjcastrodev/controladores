@@ -70,8 +70,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menuCF.add(opcLeerCF);
 
         opcBuscarCF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        opcBuscarCF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/buscar.png"))); // NOI18N
-        opcBuscarCF.setText("Buscar CF");
+        opcBuscarCF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/REIMPRE.png"))); // NOI18N
+        opcBuscarCF.setText("Reimprimir Actas CF");
         opcBuscarCF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcBuscarCFActionPerformed(evt);

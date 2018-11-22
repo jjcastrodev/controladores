@@ -38,9 +38,9 @@
                   <KeyStroke key="Ctrl+B"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/gov/afip/dgi/agencia66/tramites/view/view/buscar.png"/>
+                  <Image iconType="3" name="/gov/afip/dgi/agencia66/tramites/view/view/REIMPRE.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Buscar CF"/>
+                <Property name="text" type="java.lang.String" value="Reimprimir Actas CF"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcBuscarCFActionPerformed"/>

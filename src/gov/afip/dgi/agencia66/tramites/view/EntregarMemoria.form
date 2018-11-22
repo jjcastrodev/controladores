@@ -232,9 +232,9 @@
               <Font name="Arial Black" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gov/afip/dgi/agencia66/tramites/view/view/buscar.png"/>
+              <Image iconType="3" name="/gov/afip/dgi/agencia66/tramites/view/view/Entregar.jpg"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="BUSCAR MEMORIAS RETIRADAS"/>
+            <Property name="text" type="java.lang.String" value="ENTREGAR MEMORIAS RETIRADAS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">

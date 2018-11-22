@@ -110,8 +110,8 @@ public class EntregarMemoria extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/buscar.png"))); // NOI18N
-        lblTitulo.setText("BUSCAR MEMORIAS RETIRADAS");
+        lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/view/Entregar.jpg"))); // NOI18N
+        lblTitulo.setText("ENTREGAR MEMORIAS RETIRADAS");
 
         jLabel21.setBackground(java.awt.Color.white);
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gov/afip/dgi/agencia66/tramites/view/afip.png"))); // NOI18N
