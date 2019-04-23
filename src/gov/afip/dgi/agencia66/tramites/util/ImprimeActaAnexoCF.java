@@ -49,7 +49,7 @@ public class ImprimeActaAnexoCF {
     private final FormateaSalidasTexto fst = new FormateaSalidasTexto();
     DecimalFormat df2 = new DecimalFormat("00");
     DecimalFormat df11 = new DecimalFormat("00000000000");
-    DecimalFormat dfImp = new DecimalFormat("$ ###,###.##");
+    DecimalFormat dfImp = new DecimalFormat("$ ###,###.00");
     
     public void imprime(ControladorFiscal _cf, int _anio) {
         cf = _cf;
@@ -1599,6 +1599,8 @@ public class ImprimeActaAnexoCF {
             int minutos = cal.get(Calendar.MINUTE); 
             //FormateaSalidasTexto fst = new FormateaSalidasTexto();
             String cuitFormateado = (df11.format(cf.getCuit()));
+            String fechaActa = cf.getFechaPoceso().substring(8) +"/"+cf.getFechaPoceso().substring(5, 7) +"/" +cf.getFechaPoceso().substring(0, 4);
+            System.out.println("Fecha de proceso es: " +fechaActa);
 
              paragraph
               .add(new Phrase("En la ciudad de Tigre, pcia de Bs. As. al " +df2.format(dia)+"/"+df2.format(mesOk)+"/"+df2.format(ann)
@@ -1609,12 +1611,12 @@ public class ImprimeActaAnexoCF {
                              +" , inscripta bajo el N° de CUIT: " +fst.formatoCuit(cuitFormateado)  +", siendo atendido por el funcionario "
                              //+" , inscripta bajo el N° de CUIT: " +fst.formatoCuit(Double.toString(cf.getCuit()) )  +", siendo atendido por el funcionario "
                              +"de esta administración " +rm.getAgente() +", Legajo N°: " +rm.getLegajo() +". Conforme quedara "
-                             +"sentado en Acta F.8400 N°: " +cf.getActa()+" del " +cf.getFechaPoceso()
+                             +"sentado en Acta F.8400 N°: " +cf.getActa()+" del " +fechaActa
                              +", habiendose leido la información obrante en la memoria fiscal retirada en misma fecha, " 
                              +" correspondiente al controlador fiscal marca: " +cf.getMarca() +" modelo: " +cf.getModelo() +" código: " +cf.getCodigo() +" N°: " 
                              +cf.getNumeroCodigo() +", punto de venta " +cf.getPuestoVenta() +", se han obtenido los reportes de auditoría que arrojan "
-                             +"la siguiente información: N° de Z inicial: " +cf.getZDesde() +"; N° de Z final: " +cf.getZHasta() +" monto total de ventas: $" 
-                             +cf.getVentaingresado() +"; monto total de IVA: $" +dfImp.format(cf.getIvaingresado()) +"; último ticket emitido: " +dfImp.format(cf.getUltimocingresado())
+                             +"la siguiente información: N° de Z inicial: " +cf.getZDesde() +"; N° de Z final: " +cf.getZHasta() +" monto total de ventas: " 
+                             +dfImp.format(cf.getVentaingresado()) +"; monto total de IVA: " +dfImp.format(cf.getIvaingresado()) +"; último ticket emitido: " +cf.getUltimocingresado()
                              +" con cantidad de bloqueos: " +cf.getBloqueos() +". No siendo para mas , previa lectura a viva voz y ratificación de la presente, se firman de conformidad tres (3) "
                              +"ejemplares de un mismo tenor y a un solo efecto el acta N°" +rm.getActa()+", recibiendo el/la Sr/a. " +rm.getRetira()
                              +" duplicado de la misma. Conste.-",fontContenido));

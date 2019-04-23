@@ -39,6 +39,7 @@ public class EntregarMemoria extends javax.swing.JFrame {
     
     private final List<String> errores = new ArrayList<String>();
     private ControladorFiscal _cf;
+    private int idCF;
     /**
      * Creates new form EntregarMemoria
      */
@@ -81,7 +82,7 @@ public class EntregarMemoria extends javax.swing.JFrame {
         lblDni = new javax.swing.JLabel();
         txtZInicial = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
-        txtUltTkt = new javax.swing.JTextField();
+        txtZfinal = new javax.swing.JTextField();
         lblBloqueo = new javax.swing.JLabel();
         lblActaEntrega = new javax.swing.JLabel();
         cmbCaracter = new javax.swing.JComboBox<>();
@@ -93,7 +94,7 @@ public class EntregarMemoria extends javax.swing.JFrame {
         lblActa = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
         txtLegajo = new javax.swing.JTextField();
-        txtZfinal = new javax.swing.JTextField();
+        txtUltTkt = new javax.swing.JTextField();
         lblLegajo = new javax.swing.JLabel();
         txtIva = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
@@ -194,9 +195,9 @@ public class EntregarMemoria extends javax.swing.JFrame {
 
         lblNombre.setText("Nombre de quien retira:");
 
-        txtUltTkt.addActionListener(new java.awt.event.ActionListener() {
+        txtZfinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUltTktActionPerformed(evt);
+                txtZfinalActionPerformed(evt);
             }
         });
 
@@ -294,11 +295,11 @@ public class EntregarMemoria extends javax.swing.JFrame {
                                     .addGroup(pnlCabeceraLayout.createSequentialGroup()
                                         .addComponent(lblFinal)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtUltTkt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
                                         .addComponent(lblTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtUltTkt, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                                 .addComponent(lblDni)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -354,11 +355,11 @@ public class EntregarMemoria extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtZInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUltTkt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblInicial)
                     .addComponent(lblFinal)
                     .addComponent(lblTicket)
-                    .addComponent(txtUltTkt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotal)
@@ -481,19 +482,24 @@ public class EntregarMemoria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCuitActionPerformed
 
-    private void txtUltTktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUltTktActionPerformed
+    private void txtZfinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZfinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUltTktActionPerformed
+    }//GEN-LAST:event_txtZfinalActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         System.out.println("Para validar");
-        
+        int opcion;
         if(validar()) {
-            generaActa();
-            JOptionPane.showMessageDialog(null, "Imprimiendo actas", "Imprimiendo...",JOptionPane.INFORMATION_MESSAGE );
-            blanqueaPantalla();
-            manejarVisible(false);
-            borrarTabla();
+            opcion = JOptionPane.showConfirmDialog(null, "¿Realmente deseas Generar el acta y actualizar datos del Controlador...?", "PersisteRM?", JOptionPane.YES_NO_OPTION);
+                if (opcion == 0) { 
+                    generaActa();
+                    JOptionPane.showMessageDialog(null, "Imprimiendo actas", "Imprimiendo...",JOptionPane.INFORMATION_MESSAGE );
+                    blanqueaPantalla();
+                    manejarVisible(false);
+                    borrarTabla();
+                } else {
+                    Logger.getLogger(EntregarMemoria.class.getName()).log(Level.INFO, "Decidio no grabar","Sin grabar Retiro de Memoria");
+                  }
          } else { mostrarErrores(); }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -507,9 +513,9 @@ public class EntregarMemoria extends javax.swing.JFrame {
         txtLegajo.setVisible(valor);
         txtMonto.setVisible(valor);
         txtNombre.setVisible(valor);
-        txtUltTkt.setVisible(valor);
-        txtZInicial.setVisible(valor);
         txtZfinal.setVisible(valor);
+        txtZInicial.setVisible(valor);
+        txtUltTkt.setVisible(valor);
         
         cmbAgente.setVisible(valor);
         cmbCaracter.setVisible(valor);
@@ -568,9 +574,9 @@ public class EntregarMemoria extends javax.swing.JFrame {
         txtLegajo.setText("");
         txtMonto.setText("");
         txtNombre.setText("");
-        txtUltTkt.setText("");
-        txtZInicial.setText("");
         txtZfinal.setText("");
+        txtZInicial.setText("");
+        txtUltTkt.setText("");
         txtCuit.setText("");
         borrarTabla();
         blanqueaPantalla();
@@ -698,7 +704,7 @@ public List getResultado() {
         }else {
             for(int i=0; getResultado().size() > i; i++) {
                 _cf = (ControladorFiscal) getResultado().get(i);
-                modelo.insertRow(i, new Object[] {_cf.getId(),_cf.getRazonSocial(),_cf.getSolicitud(), _cf.getPuestoVenta() });
+                modelo.insertRow(i, new Object[] {_cf.getId(),_cf.getRazonSocial(),_cf.getSolicitud().longValue(), _cf.getPuestoVenta() });
                 this.tblResultados.setModel(modelo);
             }
             jScrollPane1.setViewportView(tblResultados);
@@ -760,9 +766,9 @@ public List getResultado() {
             txtIva.setBackground(Color.red);
         }
         
-        if(txtUltTkt.getText().isEmpty()) {
+        if(txtZfinal.getText().isEmpty()) {
             errores.add("Debe ingresar el último ticket recibido...");
-            txtUltTkt.setBackground(Color.red);
+            txtZfinal.setBackground(Color.red);
         }
 
         if(txtZInicial.getText().isEmpty()) {
@@ -770,9 +776,9 @@ public List getResultado() {
             txtZInicial.setBackground(Color.red);
         }
         
-        if(txtZfinal.getText().isEmpty()) {
+        if(txtUltTkt.getText().isEmpty()) {
             errores.add("Debe ingresar el último valor de la Z Final desde el ticket recibido...");
-            txtZfinal.setBackground(Color.red);
+            txtUltTkt.setBackground(Color.red);
         }
         
         int indice = cmbAgente.getSelectedIndex();
@@ -832,7 +838,9 @@ public List getResultado() {
         Calendar cal = Calendar.getInstance();
         int anio= cal.get(Calendar.YEAR);
         ImprimeActaAnexoCF imprime = new ImprimeActaAnexoCF();
-        try {
+       try {
+            
+            System.out.println("Voy a imprimir el id: " +_cf.getId());  
             imprime.imprimeActaRetornoMemoria(_cf, creaObjeto(), anio);
         } catch (IOException ex) {
             Logger.getLogger(EntregarMemoria.class.getName()).log(Level.SEVERE, null, ex);
@@ -849,9 +857,9 @@ public List getResultado() {
             txtDireccion.setBackground(Color.YELLOW);
             txtMonto.setBackground(Color.white);
             txtIva.setBackground(Color.white);
-            txtUltTkt.setBackground(Color.white);
-            txtZInicial.setBackground(Color.white);
             txtZfinal.setBackground(Color.white);
+            txtZInicial.setBackground(Color.white);
+            txtUltTkt.setBackground(Color.white);
     }
 
     private RetiroMemoria creaObjeto() {
@@ -865,6 +873,8 @@ public List getResultado() {
         String fp = String.valueOf(anio)+String.format("%02d", mes)+String.format("%02d", dia);
         
         RetiroMemoria rm = new RetiroMemoria();
+        
+        System.out.println("Id antes de armar objeto RM: " +_cf.getId() +" - " +_cf.getMarca());
         
         rm.setIdControladorFiscal(_cf.getId());
         rm.setAgente((String)cmbAgente.getSelectedItem());
@@ -895,18 +905,28 @@ public List getResultado() {
     }
 
     private void persiste(RetiroMemoria _rm) {
-        int opcion;
+        //int opcion;
         try {
-            opcion = JOptionPane.showConfirmDialog(null, "¿Realmente deseas Grabar...?", "PersisteRM?", JOptionPane.YES_NO_OPTION);
-
-                if (opcion == 0) { 
+          //  opcion = JOptionPane.showConfirmDialog(null, "¿Realmente deseas Grabar...?", "PersisteRM?", JOptionPane.YES_NO_OPTION);
+          
+            //    if (opcion == 0) { 
                   RetiroMemoriaJpaController jpaRM = new RetiroMemoriaJpaController(EntityMan.getInstance());
+                    System.out.println("Pongo acta: " +_rm.getActa());
+                    System.out.println(_rm.getAgente());
+                    System.out.println(_rm.getCaracter());
+                    System.out.println(_rm.getDireccion());
+                    System.out.println(_rm.getDni());
+                    System.out.println(_rm.getFechaProceso());
+                    System.out.println(_rm.getId());
+                    System.out.println(_rm.getIdControladorFiscal());
+                    System.out.println(_rm.getLegajo());
+                    System.out.println(_rm.getRetira());
                   jpaRM.create(_rm);
                   ControladorFiscalJpaController jpsCF = new ControladorFiscalJpaController(EntityMan.getInstance());
                   jpsCF.edit(_cf);
-                } else {
-                   Logger.getLogger(EntregarMemoria.class.getName()).log(Level.INFO, "Decidio no grabar","Sin grabar Retiro de Memoria");
-                }
+          //      } else {
+          //         Logger.getLogger(EntregarMemoria.class.getName()).log(Level.INFO, "Decidio no grabar","Sin grabar Retiro de Memoria");
+          //      }
 
         } catch (Exception ex) {
             System.out.println("Error al persistir");
@@ -917,6 +937,8 @@ public List getResultado() {
     }
 
     private void buscarDatosCF() {
+        // obtiene el registro que fue seleccionado
+        setearRegistroSeleccionado();
          txtActaRetiro.setText(_cf.getActa());
          txtNombre.setText(_cf.getNombre());
          txtNombre.setBackground(Color.yellow);
@@ -929,9 +951,15 @@ public List getResultado() {
     private boolean existeRM(int fila) {
         BuscarRetiroMemoria brm = new BuscarRetiroMemoria();
         DefaultTableModel modelo = (DefaultTableModel)tblResultados.getModel();
-        int idCF = (int) modelo.getValueAt(fila, 0);
+        idCF = (int) modelo.getValueAt(fila, 0);
         System.out.println("El id es: " +idCF);
         return brm.existeRM(idCF);
+    }
+
+    private void setearRegistroSeleccionado() {
+        System.out.println("Antes de seteo tengo el id:" + _cf.getId()) ;
+        _cf = (ControladorFiscal) resultado.get(tblResultados.getSelectedRow());
+        System.out.println("Setee ahora el id:" + _cf.getId()) ;
     }
 
 } /** Fin de la clase */

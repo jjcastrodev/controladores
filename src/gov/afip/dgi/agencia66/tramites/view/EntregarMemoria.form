@@ -117,11 +117,11 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblFinal" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtUltTkt" min="-2" pref="76" max="-2" attributes="0"/>
+                                          <Component id="txtZfinal" min="-2" pref="76" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Component id="lblTicket" min="-2" pref="56" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtZfinal" min="-2" pref="78" max="-2" attributes="0"/>
+                                          <Component id="txtUltTkt" min="-2" pref="78" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -195,11 +195,11 @@
                   <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtZInicial" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtZfinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUltTkt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblInicial" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblFinal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTicket" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUltTkt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtZfinal" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -371,9 +371,9 @@
             <Property name="text" type="java.lang.String" value="Nombre de quien retira:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUltTkt">
+        <Component class="javax.swing.JTextField" name="txtZfinal">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUltTktActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtZfinalActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblBloqueo">
@@ -442,7 +442,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtZfinal">
+        <Component class="javax.swing.JTextField" name="txtUltTkt">
         </Component>
         <Component class="javax.swing.JLabel" name="lblLegajo">
           <Properties>
